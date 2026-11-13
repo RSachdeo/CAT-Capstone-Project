@@ -176,7 +176,7 @@ Example GitHub Actions:
 
 ## Author
 
-Automation QA Engineer - Capstone Project
+Ritesh Sachdeo - Capstone Project
 
 ## License
 
