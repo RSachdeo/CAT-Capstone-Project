@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playwright Capstone Project - Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+        }
+        .slide {
+            min-height: 100vh;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 3px solid #00a8cc;
+            page-break-after: always;
+        }
+        .slide:nth-child(odd) {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        .slide:nth-child(even) {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+        }
+        .title-slide {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .title-slide h1 {
+            font-size: 3.5em;
+            color: #00a8cc;
+            margin-bottom: 20px;
+        }
+        .title-slide h2 {
+            font-size: 2em;
+            color: #eee;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+        .title-slide .subtitle {
+            font-size: 1.3em;
+            color: #888;
+        }
+        .title-slide .author {
+            margin-top: 60px;
+            font-size: 1.2em;
+            color: #00a8cc;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #00a8cc;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #00a8cc;
+            padding-bottom: 15px;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: #00d9ff;
+            margin: 30px 0 20px 0;
+        }
+        h3 {
+            font-size: 1.4em;
+            color: #00d9ff;
+            margin: 20px 0 15px 0;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        li {
+            font-size: 1.3em;
+            margin: 15px 0;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.5;
+        }
+        li::before {
+            content: "▸";
+            color: #00a8cc;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 30px;
+        }
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .code-block {
+            background: #0d1117;
+            border-radius: 10px;
+            padding: 25px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+            border-left: 4px solid #00a8cc;
+            margin: 20px 0;
+        }
+        .code-block code {
+            color: #c9d1d9;
+        }
+        .highlight {
+            color: #00a8cc;
+            font-weight: bold;
+        }
+        .card {
+            background: rgba(0, 168, 204, 0.1);
+            border: 1px solid #00a8cc;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 15px 0;
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #00a8cc;
+        }
+        .card ul li {
+            font-size: 1.1em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 1.1em;
+        }
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        th {
+            background: #00a8cc;
+            color: #fff;
+            font-weight: 600;
+        }
+        tr:hover {
+            background: rgba(0, 168, 204, 0.1);
+        }
+        .stat-box {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 168, 204, 0.15);
+            border-radius: 15px;
+            border: 2px solid #00a8cc;
+        }
+        .stat-box .number {
+            font-size: 3em;
+            color: #00a8cc;
+            font-weight: bold;
+        }
+        .stat-box .label {
+            font-size: 1.1em;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        .icon {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            right: 40px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .tag {
+            display: inline-block;
+            background: #00a8cc;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
+        }
+        .perficient-logo {
+            color: #00a8cc;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        @media print {
+            .slide {
+                page-break-after: always;
+                min-height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide title-slide">
+    <h1>Playwright Capstone Project</h1>
+    <h2>Enterprise E-Commerce Automation Framework</h2>
+    <p class="subtitle">Application Under Test: automationexercise.com</p>
+    <p class="author">
+        <span class="perficient-logo">PERFICIENT</span><br><br>
+        Automation QA Engineer
+    </p>
+</div>
+
+<!-- Slide 2: Agenda -->
+<div class="slide">
+    <h1>Agenda</h1>
+    <div class="two-column">
+        <div>
+            <ul>
+                <li>Project Overview & Goals</li>
+                <li>Framework Architecture</li>
+                <li>Page Object Model Design</li>
+                <li>Custom Fixtures</li>
+                <li>Test Data Management</li>
+            </ul>
+        </div>
+        <div>
+            <ul>
+                <li>Test Coverage</li>
+                <li>Advanced Features</li>
+                <li>Reporting & Debugging</li>
+                <li>Demo & Results</li>
+                <li>Key Takeaways</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 3: Project Overview -->
+<div class="slide">
+    <h1>Project Overview</h1>
+    <h2>Problem Statement</h2>
+    <ul>
+        <li>Client needs a <span class="highlight">scalable, maintainable</span> automation framework</li>
+        <li>Validate critical business workflows across browsers</li>
+        <li>Reduce manual validation effort</li>
+        <li>Demonstrate modern testing practices</li>
+    </ul>
+    <h2>Technology Stack</h2>
+    <div style="margin-top: 20px;">
+        <span class="tag">Playwright</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">axe-core</span>
+        <span class="tag">HTML Reporter</span>
+    </div>
+</div>
+
+<!-- Slide 4: Framework Architecture -->
+<div class="slide">
+    <h1>Framework Architecture</h1>
+    <div class="code-block">
+        <code>
+playwright-ecommerce-framework/<br>
+├── <span style="color:#00a8cc">pages/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Page Object Model classes<br>
+├── <span style="color:#00a8cc">fixtures/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Custom Playwright fixtures<br>
+├── <span style="color:#00a8cc">tests/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Test specifications<br>
+├── <span style="color:#00a8cc">testdata/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Test data files<br>
+├── <span style="color:#00a8cc">utils/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Helper utilities<br>
+├── <span style="color:#00a8cc">config/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Environment configuration<br>
+├── <span style="color:#00a8cc">reports/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Test execution reports<br>
+└── playwright.config.ts
+        </code>
+    </div>
+    <h3>Design Principles</h3>
+    <ul>
+        <li><span class="highlight">Separation of Concerns</span> - Pages, Tests, Data, Utils</li>
+        <li><span class="highlight">Single Responsibility</span> - Each class has one purpose</li>
+        <li><span class="highlight">DRY Principle</span> - Reusable components and fixtures</li>
+    </ul>
+</div>
+
+<!-- Slide 5: Page Object Model -->
+<div class="slide">
+    <h1>Page Object Model</h1>
+    <div class="two-column">
+        <div>
+            <h3>Page Classes</h3>
+            <ul>
+                <li><span class="highlight">BasePage</span> - Common functionality</li>
+                <li><span class="highlight">HomePage</span> - Landing page</li>
+                <li><span class="highlight">LoginPage</span> - Auth flows</li>
+                <li><span class="highlight">ProductsPage</span> - Product listing</li>
+                <li><span class="highlight">CartPage</span> - Shopping cart</li>
+                <li><span class="highlight">CheckoutPage</span> - Payment flow</li>
+                <li><span class="highlight">ContactUsPage</span> - Contact form</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Benefits</h3>
+            <ul>
+                <li>Centralized element locators</li>
+                <li>Reusable page methods</li>
+                <li>Easy maintenance</li>
+                <li>Readable test code</li>
+                <li>Reduced duplication</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Locator Strategy -->
+<div class="slide">
+    <h1>Locator Strategy</h1>
+    <div class="two-column">
+        <div>
+            <h3>Preferred (Most Stable)</h3>
+            <ul>
+                <li><span class="highlight">data-qa</span> attributes</li>
+                <li>Semantic selectors (roles)</li>
+                <li>Text-based locators</li>
+            </ul>
+            <div class="code-block" style="font-size: 0.85em;">
+                <code>
+// Good - Stable<br>
+page.locator('[data-qa="login-button"]')<br>
+page.getByRole('button', {name: 'Submit'})<br>
+page.getByText('Add to Cart')
+                </code>
+            </div>
+        </div>
+        <div>
+            <h3>Avoided (Fragile)</h3>
+            <ul>
+                <li>XPath expressions</li>
+                <li>CSS class selectors</li>
+                <li>Complex DOM paths</li>
+            </ul>
+            <div class="code-block" style="font-size: 0.85em;">
+                <code>
+// Avoid - Fragile<br>
+page.locator('.btn-primary')<br>
+page.locator('//div[3]/button')<br>
+page.locator('#app > div > form')
+                </code>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Custom Fixtures -->
+<div class="slide">
+    <h1>Custom Fixtures</h1>
+    <div class="two-column">
+        <div class="card">
+            <h3>Page Fixtures</h3>
+            <ul>
+                <li>Pre-configured page objects</li>
+                <li>Automatic ad blocking</li>
+                <li>Consistent setup</li>
+            </ul>
+            <div class="code-block" style="font-size: 0.8em;">
+                <code>
+test('example', async ({ <br>
+&nbsp;&nbsp;homePage,<br>
+&nbsp;&nbsp;loginPage,<br>
+&nbsp;&nbsp;cartPage <br>
+}) => {<br>
+&nbsp;&nbsp;// Pages ready to use<br>
+});
+                </code>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Auth Fixtures</h3>
+            <ul>
+                <li>Pre-authenticated sessions</li>
+                <li>Auto user registration</li>
+                <li>Cleanup after tests</li>
+            </ul>
+            <div class="code-block" style="font-size: 0.8em;">
+                <code>
+test('checkout', async ({<br>
+&nbsp;&nbsp;authenticatedPage<br>
+}) => {<br>
+&nbsp;&nbsp;// User already logged in<br>
+});
+                </code>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Test Data Management -->
+<div class="slide">
+    <h1>Test Data Management</h1>
+    <div class="three-column">
+        <div class="card">
+            <h3>users.ts</h3>
+            <ul>
+                <li>User profiles</li>
+                <li>Address details</li>
+                <li>Invalid credentials</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>products.ts</h3>
+            <ul>
+                <li>Search terms</li>
+                <li>Categories</li>
+                <li>Brands</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>payment.ts</h3>
+            <ul>
+                <li>Card details</li>
+                <li>Multiple cards</li>
+                <li>DDT scenarios</li>
+            </ul>
+        </div>
+    </div>
+    <h3 style="margin-top: 40px;">Data-Driven Testing Example</h3>
+    <div class="code-block" style="font-size: 0.9em;">
+        <code>
+productSearchData.forEach((data) => {<br>
+&nbsp;&nbsp;test(`Search for: ${data.searchTerm}`, async ({ productsPage }) => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;await productsPage.searchProduct(data.searchTerm);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;expect(await productsPage.getProductsCount()).toBeGreaterThan(0);<br>
+&nbsp;&nbsp;});<br>
+});
+        </code>
+    </div>
+</div>
+
+<!-- Slide 9: Test Coverage -->
+<div class="slide">
+    <h1>Test Coverage</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Test Suite</th>
+                <th>Test Cases</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Authentication</td>
+                <td>TC001 - TC004</td>
+                <td>Registration, Login, Logout, Error handling</td>
+            </tr>
+            <tr>
+                <td>Products</td>
+                <td>TC005 - TC010</td>
+                <td>Search, View details, Add/Remove cart</td>
+            </tr>
+            <tr>
+                <td>Checkout</td>
+                <td>TC011 - TC012</td>
+                <td>Full checkout flow, Order validation</td>
+            </tr>
+            <tr>
+                <td>Contact Us</td>
+                <td>TC013 - TC014</td>
+                <td>Form submission, Navigation</td>
+            </tr>
+            <tr>
+                <td>Accessibility</td>
+                <td>TC015 - TC019</td>
+                <td>WCAG compliance scans</td>
+            </tr>
+            <tr>
+                <td>Visual</td>
+                <td>TC020 - TC025</td>
+                <td>Screenshot comparisons</td>
+            </tr>
+            <tr>
+                <td>Network</td>
+                <td>TC026 - TC031</td>
+                <td>Mocking, Interception, Throttling</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Slide 10: Results Summary -->
+<div class="slide">
+    <h1>Test Results Summary</h1>
+    <div class="three-column" style="margin-top: 50px;">
+        <div class="stat-box">
+            <div class="number">31+</div>
+            <div class="label">Test Cases</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">8</div>
+            <div class="label">Page Objects</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">3</div>
+            <div class="label">Browsers</div>
+        </div>
+    </div>
+    <div class="three-column" style="margin-top: 30px;">
+        <div class="stat-box">
+            <div class="number">7</div>
+            <div class="label">Test Suites</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">96%</div>
+            <div class="label">Pass Rate</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">&lt;2min</div>
+            <div class="label">Execution Time</div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 11: Advanced Features - Accessibility -->
+<div class="slide">
+    <h1>Accessibility Testing</h1>
+    <div class="two-column">
+        <div>
+            <h3>axe-core Integration</h3>
+            <ul>
+                <li>WCAG 2.0/2.1 compliance</li>
+                <li>Automated a11y scans</li>
+                <li>Detailed violation reports</li>
+                <li>Severity classification</li>
+            </ul>
+        </div>
+        <div>
+            <div class="code-block" style="font-size: 0.85em;">
+                <code>
+import AxeBuilder from '@axe-core/playwright';<br><br>
+const results = await new AxeBuilder({ page })<br>
+&nbsp;&nbsp;.withTags(['wcag2a', 'wcag2aa'])<br>
+&nbsp;&nbsp;.analyze();<br><br>
+// Check for critical violations<br>
+expect(results.violations<br>
+&nbsp;&nbsp;.filter(v => v.impact === 'critical')<br>
+).toHaveLength(0);
+                </code>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Advanced Features - Network -->
+<div class="slide">
+    <h1>Network Interception & Mocking</h1>
+    <div class="two-column">
+        <div>
+            <h3>Capabilities</h3>
+            <ul>
+                <li>Block ads and trackers</li>
+                <li>Mock API responses</li>
+                <li>Simulate slow networks</li>
+                <li>Capture request timings</li>
+                <li>Test error scenarios</li>
+            </ul>
+        </div>
+        <div>
+            <div class="code-block" style="font-size: 0.85em;">
+                <code>
+// Block ad requests<br>
+await page.route('**/googleads**', <br>
+&nbsp;&nbsp;route => route.abort());<br><br>
+// Mock API response<br>
+await page.route('**/api/products', <br>
+&nbsp;&nbsp;route => route.fulfill({<br>
+&nbsp;&nbsp;&nbsp;&nbsp;status: 200,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;body: JSON.stringify(mockData)<br>
+&nbsp;&nbsp;}));
+                </code>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 13: Visual Regression -->
+<div class="slide">
+    <h1>Visual Regression Testing</h1>
+    <div class="two-column">
+        <div>
+            <h3>How It Works</h3>
+            <ul>
+                <li>Capture baseline screenshots</li>
+                <li>Compare against new runs</li>
+                <li>Detect visual changes</li>
+                <li>Configurable thresholds</li>
+            </ul>
+            <h3 style="margin-top: 30px;">Pages Covered</h3>
+            <ul>
+                <li>Homepage</li>
+                <li>Login Page</li>
+                <li>Products Page</li>
+                <li>Cart Page</li>
+                <li>Contact Us Page</li>
+            </ul>
+        </div>
+        <div>
+            <div class="code-block" style="font-size: 0.85em;">
+                <code>
+await expect(page).toHaveScreenshot(<br>
+&nbsp;&nbsp;'homepage.png',<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fullPage: false,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;maxDiffPixelRatio: 0.1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;animations: 'disabled'<br>
+&nbsp;&nbsp;}<br>
+);
+                </code>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 14: Cross-Browser Testing -->
+<div class="slide">
+    <h1>Cross-Browser Testing</h1>
+    <div class="three-column" style="text-align: center; margin-top: 50px;">
+        <div class="card">
+            <div class="icon">🌐</div>
+            <h3>Chromium</h3>
+            <p>Chrome, Edge</p>
+        </div>
+        <div class="card">
+            <div class="icon">🦊</div>
+            <h3>Firefox</h3>
+            <p>Mozilla Firefox</p>
+        </div>
+        <div class="card">
+            <div class="icon">🧭</div>
+            <h3>WebKit</h3>
+            <p>Safari</p>
+        </div>
+    </div>
+    <div class="code-block" style="margin-top: 40px; font-size: 0.9em;">
+        <code>
+# Run on specific browser<br>
+npm run test:chrome&nbsp;&nbsp;&nbsp;# Chromium only<br>
+npm run test:firefox&nbsp;&nbsp;# Firefox only<br>
+npm run test:webkit&nbsp;&nbsp;&nbsp;# WebKit/Safari only<br>
+npm test&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# All browsers
+        </code>
+    </div>
+</div>
+
+<!-- Slide 15: Reporting & Debugging -->
+<div class="slide">
+    <h1>Reporting & Debugging</h1>
+    <div class="two-column">
+        <div>
+            <h3>Reports Generated</h3>
+            <ul>
+                <li><span class="highlight">HTML Report</span> - Interactive results</li>
+                <li><span class="highlight">JSON Output</span> - CI integration</li>
+                <li><span class="highlight">Screenshots</span> - On failure</li>
+                <li><span class="highlight">Videos</span> - On retry</li>
+                <li><span class="highlight">Traces</span> - Step-by-step replay</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Debugging Tools</h3>
+            <ul>
+                <li><span class="highlight">Trace Viewer</span> - Timeline replay</li>
+                <li><span class="highlight">Debug Mode</span> - Step through</li>
+                <li><span class="highlight">UI Mode</span> - Visual debugging</li>
+                <li><span class="highlight">Console Logs</span> - Runtime info</li>
+            </ul>
+        </div>
+    </div>
+    <div class="code-block" style="margin-top: 30px;">
+        <code>
+npm run test:debug&nbsp;&nbsp;&nbsp;# Debug mode - step through tests<br>
+npm run test:ui&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# UI mode - visual test runner<br>
+npm run report&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# View HTML report<br>
+npx playwright show-trace trace.zip&nbsp;&nbsp;# View trace file
+        </code>
+    </div>
+</div>
+
+<!-- Slide 16: Running the Framework -->
+<div class="slide">
+    <h1>Running the Framework</h1>
+    <div class="code-block">
+        <code>
+# Install dependencies<br>
+npm install<br>
+npx playwright install<br><br>
+# Run tests<br>
+npm test&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# All tests, all browsers<br>
+npm run test:headed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Watch browser execution<br>
+npm run test:chrome&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Chrome only<br><br>
+# View results<br>
+npm run report&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Open HTML report
+        </code>
+    </div>
+    <h3 style="margin-top: 30px;">CI/CD Ready</h3>
+    <ul>
+        <li>Environment-based configuration</li>
+        <li>Automatic retries on failure</li>
+        <li>Artifact collection for debugging</li>
+    </ul>
+</div>
+
+<!-- Slide 17: Key Decisions -->
+<div class="slide">
+    <h1>Key Design Decisions</h1>
+    <div class="two-column">
+        <div class="card">
+            <h3>Why Playwright?</h3>
+            <ul>
+                <li>Modern, fast execution</li>
+                <li>Auto-wait mechanism</li>
+                <li>Built-in cross-browser</li>
+                <li>Excellent TypeScript support</li>
+                <li>Rich debugging tools</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Why Page Object Model?</h3>
+            <ul>
+                <li>Maintainability</li>
+                <li>Reusability</li>
+                <li>Readability</li>
+                <li>Single point of change</li>
+                <li>Team scalability</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card" style="margin-top: 30px;">
+        <h3>Framework Scalability</h3>
+        <ul>
+            <li>Easy to add new pages and tests</li>
+            <li>Modular utilities for common operations</li>
+            <li>Data-driven approach for test variations</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 18: Challenges & Solutions -->
+<div class="slide">
+    <h1>Challenges & Solutions</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Challenge</th>
+                <th>Solution</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ads blocking test execution</td>
+                <td>Network interception to block ad requests</td>
+            </tr>
+            <tr>
+                <td>Flaky element detection</td>
+                <td>Stable locators (data-qa, roles, text)</td>
+            </tr>
+            <tr>
+                <td>Dialog/Alert handling</td>
+                <td>Event listeners for dialogs</td>
+            </tr>
+            <tr>
+                <td>Multiple matching elements</td>
+                <td>.first(), .nth(), more specific selectors</td>
+            </tr>
+            <tr>
+                <td>Slow page loads</td>
+                <td>Custom waitForPageLoad(), increased timeouts</td>
+            </tr>
+            <tr>
+                <td>Test data cleanup</td>
+                <td>Delete account in teardown</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Slide 19: Demo -->
+<div class="slide title-slide">
+    <h1>Live Demo</h1>
+    <h2>Running Tests in Headed Mode</h2>
+    <div class="code-block" style="text-align: left; display: inline-block; margin-top: 40px;">
+        <code>
+npm run test:headed -- --project=chromium
+        </code>
+    </div>
+</div>
+
+<!-- Slide 20: Summary -->
+<div class="slide">
+    <h1>Summary</h1>
+    <div class="two-column">
+        <div>
+            <h3>What We Built</h3>
+            <ul>
+                <li>Production-ready framework</li>
+                <li>31+ automated test cases</li>
+                <li>Page Object Model architecture</li>
+                <li>Custom fixtures for efficiency</li>
+                <li>Comprehensive reporting</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Advanced Capabilities</h3>
+            <ul>
+                <li>Accessibility testing</li>
+                <li>Visual regression</li>
+                <li>Network mocking</li>
+                <li>Cross-browser support</li>
+                <li>Data-driven testing</li>
+            </ul>
+        </div>
+    </div>
+    <div class="card" style="margin-top: 40px; text-align: center;">
+        <h3>Repository</h3>
+        <p style="font-size: 1.3em; color: #00a8cc;">github.com/RSachdeo/CAT-Capstone-Project</p>
+    </div>
+</div>
+
+<!-- Slide 21: Thank You -->
+<div class="slide title-slide">
+    <h1>Thank You!</h1>
+    <h2>Questions?</h2>
+    <p class="author" style="margin-top: 80px;">
+        <span class="perficient-logo">PERFICIENT</span>
+    </p>
+</div>
+
+</body>
+</html>
